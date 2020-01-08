@@ -261,7 +261,7 @@ classdef FFNNS < handle
                     
                     estimatedTime = rt*(nP/nP1)*(obj.Layers(i).N / obj.Layers(i-1).N);
                     
-                    fprintf('\nEstimated computation time: ~ %.5f seconds', estimatedTime);
+                    %fprintf('\nEstimated computation time: ~ %.5f seconds', estimatedTime);
                 end
                 
                 st = tic;
@@ -272,8 +272,8 @@ classdef FFNNS < handle
                 obj.numReachSet(i) = length(In);
                 obj.reachTime = [obj.reachTime t1];
                 
-                fprintf('\nExact computation time: %.5f seconds', t1);               
-                fprintf('\nNumber of reachable set at the output of layer %d: %d', i, length(In));               
+                %fprintf('\nExact computation time: %.5f seconds', t1);               
+                %fprintf('\nNumber of reachable set at the output of layer %d: %d', i, length(In));               
                                
             end
             

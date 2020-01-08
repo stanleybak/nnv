@@ -194,7 +194,7 @@ classdef PosLin
                     m = size(map, 1); % number of stepReach operations needs to be executed
                     In = I;
                     for i=1:m
-                        fprintf('\nPerforming exact PosLin_%d operation using Star', map(i));
+                        %fprintf('\nPerforming exact PosLin_%d operation using Star', map(i));
                         In = PosLin.stepReachMultipleInputs(In, map(i), lb(map(i)), ub(map(i)), option);
                     end               
                     S = In;
@@ -231,7 +231,7 @@ classdef PosLin
                     map = find(lb <0 & ub > 0);
                     m = length(map);                    
                     for i=1:m
-                        fprintf('\nPerforming exact PosLin_%d operation using Star', map(i));
+                        %fprintf('\nPerforming exact PosLin_%d operation using Star', map(i));
                         In = PosLin.stepReachMultipleInputs2(In, map(i), option);
                     end               
                     S = In;
@@ -361,7 +361,7 @@ classdef PosLin
                 V(index, :) = 0;
                 S = Star(V, I.C, I.d, I.predicate_lb, I.predicate_ub);
             elseif lb < 0 && ub > 0
-                fprintf('\nAdd a new predicate variables at index = %d', index);
+                %fprintf('\nAdd a new predicate variables at index = %d', index);
                 n = I.nVar + 1;
                 % over-approximation constraints 
                 % constraint 1: y[index] = ReLU(x[index]) >= 0
@@ -410,7 +410,7 @@ classdef PosLin
                 %[lb, ub] = I.estimateRanges;
                 if ~isempty(lb) && ~isempty(ub)
                     for i=1:I.dim
-                        fprintf('\nPerforming approximate PosLin_%d operation using Star', i);
+                        %fprintf('\nPerforming approximate PosLin_%d operation using Star', i);
                         In = PosLin.stepReachStarApprox(In, i, lb(i), ub(i));
                     end
                 S = In;
@@ -447,7 +447,7 @@ classdef PosLin
                     map = find(lb <0 & ub > 0);
                     m = length(map); 
                     for i=1:m
-                        fprintf('\nPerforming approximate PosLin_%d operation using Star', map(i));
+                        %fprintf('\nPerforming approximate PosLin_%d operation using Star', map(i));
                         In = PosLin.stepReachStarApprox2(In, map(i));
                     end
                     S = In;
@@ -547,7 +547,7 @@ classdef PosLin
                 In = Star(I.V, I.C, I.d, pred_lb, pred_ub);          
                 if ~isempty(B)
                     for i=1:I.dim
-                        fprintf('\nPerforming fast approximate PosLin_%d operation using Star', i);
+                        %fprintf('\nPerforming fast approximate PosLin_%d operation using Star', i);
                         In = PosLin.stepReachStarApproxFast(In, i, B.lb(i), B.ub(i));
                     end
                 S = In;
@@ -694,7 +694,7 @@ classdef PosLin
                     m = size(map, 1); % number of stepReach operations needs to be executed
                     In = I;
                     for i=1:m
-                        fprintf('\nPerforming exact PosLin_%d operation using Polyhedron', map(i));
+                        %fprintf('\nPerforming exact PosLin_%d operation using Polyhedron', map(i));
                         In = PosLin.stepReachMultipleInputs_Polyhedron(In, map(i), lb(map(i)), ub(map(i)), option);
                     end               
                     R = In;
@@ -778,7 +778,7 @@ classdef PosLin
             In = I;
             [lb, ub] = I.getBounds;
             for i=1:I.dim
-                fprintf('\nPerforming approximate PosLin_%d operation using Zonotope', i);
+                %fprintf('\nPerforming approximate PosLin_%d operation using Zonotope', i);
                 In = PosLin.stepReachZonoApprox(In, i, lb(i), ub(i));
             end
             Z = In;
@@ -846,7 +846,7 @@ classdef PosLin
                       
             In = I;
             for i=1:I.dim
-                fprintf('\nPerforming approximate PosLin_%d operation using new Zonotope method', i);
+                %fprintf('\nPerforming approximate PosLin_%d operation using new Zonotope method', i);
                 In = PosLin.stepReachZonoApprox2(In, i);
             end
             Z = In;
@@ -980,7 +980,7 @@ classdef PosLin
                     map = find(lb <0 & ub > 0);
                     m = length(map); 
                     for i=1:m
-                        fprintf('\nPerforming approximate PosLin_%d operation using Abstract Domain', map(i));
+                        %fprintf('\nPerforming approximate PosLin_%d operation using Abstract Domain', map(i));
                         In = PosLin.stepReachAbstractDomain(In, map(i));
                     end
                     S = In;
@@ -1033,8 +1033,7 @@ classdef PosLin
                 otherwise
                     error('Invalid number of input arguments (should be 1, 2 or 3)');
             end
-            
-            
+           
             if strcmp(method, 'exact-star') % exact analysis using star
                 
                 R = PosLin.reach_star_exact_multipleInputs(I, option);

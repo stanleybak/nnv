@@ -109,7 +109,13 @@ classdef LayerS
             
             n = length(I);
             
-            if strcmp(option, 'parallel') % reachability analysis using star set
+            % process timeout
+            start_clock = evalin('base', 'start_clock');
+            timeout_sec = evalin('base', 'timeout_sec');
+            
+            if etime(clock, start_clock) > timeout_sec % timeout
+                %
+            elseif strcmp(option, 'parallel') % reachability analysis using star set
                                  
                 parfor i=1:n
                     
@@ -123,7 +129,12 @@ classdef LayerS
                     end
                     % apply activation function: y' = ReLU(y) or y' = 
 
-                    if strcmp(obj.f, 'purelin')
+                    
+                    %fprintf("LAYERS-REACH!\n");
+
+                    if etime(clock, start_clock) > timeout_sec % timeout
+                        %
+                    elseif strcmp(obj.f, 'purelin')
                         S = [S I1];
                     elseif strcmp(obj.f, 'poslin')
                         S = [S PosLin.reach(I1, method)];
